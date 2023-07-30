@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Task {
     public String taskName;
     public String taskDescription;
@@ -10,34 +9,21 @@ public class Task {
     public String taskStatus;
     public int numbOfTask;
     ArrayList<String> allTasks = new ArrayList<String>();
-
-    
-    
-
-    // public Task(String taskName, String taskDescription, String taskDueDate) {
-    //     this.taskName = taskName;
-    //     this.taskDescription = taskDescription;
-    //     this.taskDueDate = taskDueDate;
-    //     this.taskStatus = "Incomplete";
-    // }
+    public int numbChoice; 
+    Scanner scanner = new Scanner(System.in);
 
     public void addTask() {
-        
-        
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println();
         System.out.print("How many tasks? ");
-        
         String taskNumb = scanner.nextLine();
-        
-
         numbOfTask = Integer.parseInt(taskNumb);
         int i;
         System.out.println();
+
         for (i = 1; i <= numbOfTask; i++) {
             System.out.print("Enter task " + i + " name: ");
-            this.taskName = scanner.nextLine(); //taskName stores it 
-            // System.out.println(taskName);
+            this.taskName = scanner.nextLine();
             allTasks.add(taskName);
 
             System.out.print("Enter task " + i + " description: ");
@@ -48,59 +34,88 @@ public class Task {
             this.taskDueDate = scanner.nextLine();
             allTasks.add(taskDueDate);
 
-            
             System.out.println();
-
         }
 
-        
-        Scanner chooseNumb = new Scanner(System.in);
-        String numb;
-        System.out.print("Enter a number or press 0 to go to home page: ");
-        numb = chooseNumb.nextLine();
-        System.out.println();
-        int numbChoice = Integer.parseInt(numb);
-        scanner.close();
-
-    
-        int n = allTasks.size();
-
-
-        if (numbChoice == 2) {
-            int taskCount = 1;
-            for (int j = 0; j < n; j++) {
-                if (n == 3) {
-                    System.out.println(allTasks);
-                    break;
-                } else if (n > 3) {
-                    List<String> selectedList = allTasks.subList(j, j + 3);
-                    j+=2;
-                    System.out.println("Task " +  taskCount + ": \n" + selectedList);
-                    System.out.println();
-                    taskCount++;
-                }
-
-            }
-            // System.out.println(allTasks);
-            
-        }
-        if (numbChoice == 0) {
-            System.out.println("--ToDo List--\n");
-            System.out.println("1. Add Task");
-            System.out.println("2. View All Tasks");
-            System.out.println("3. Edit Task\n");
-        }
-
-
-
-
-        
     }
 
+    public int ask_Numb() {
+        System.out.print("Enter a number or press 0 to go to home page: ");
+        String numb = scanner.nextLine();
+        System.out.println();
+        numbChoice = Integer.parseInt(numb);
+        // scanner.close();
 
+        return numbChoice;
+    }
 
+    public void viewallTasks() {
+        int n = allTasks.size();
 
-   
+        int taskCount = 1;
+        for (int j = 0; j < n; j++) {
+            if (n == 3) {
+                System.out.println(allTasks);
+                break;
+            } else if (n > 3) {
+                List<String> selectedList = allTasks.subList(j, j + 3);
+                j += 2;
+                System.out.println("Task " + taskCount + ": \n" + selectedList);
+                System.out.println();
+                taskCount++;
+            }
+        }
 
-    
+    }
+
+    public void changeTasks() {
+        int n = allTasks.size();
+
+        int taskCount = 1;
+        for (int j = 0; j < n; j += 3) {
+            List<String> selectedList = allTasks.subList(j, Math.min(j + 3, n));
+            System.out.println("Task " + taskCount + ": \n" + selectedList);
+
+            
+            System.out.print("Do you want to edit this task? ");
+            String taskNumb = scanner.nextLine();
+            System.out.println();
+            if (taskNumb.equals("yes")) {
+                editSingleTask(selectedList);
+            }
+
+            System.out.println();
+            taskCount++;
+        }
+    }
+
+    private void editSingleTask(List<String> selectedList) { //private limits it to the task class 
+        
+        System.out.print("a) Name, b) description, or c) due date? enter letter: ");
+        String editLetter = scanner.nextLine();
+        System.out.println();
+
+        switch (editLetter) { //pass in editLetter as the parameter -- compares it to this
+            case "a":
+                System.out.print("Enter name: ");
+                this.taskName = scanner.nextLine();
+                selectedList.set(0, this.taskName);
+                break; 
+            case "b":
+                System.out.print("Enter description: ");
+                this.taskDescription = scanner.nextLine();
+                selectedList.set(1, this.taskDescription);
+                break;
+            case "c":
+                System.out.print("Enter due date: ");
+                this.taskDueDate = scanner.nextLine();
+                selectedList.set(2, this.taskDueDate);
+                break;
+            
+        }
+    }
+
+    public void editTasks() {
+        changeTasks();
+    }
 }
