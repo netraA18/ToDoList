@@ -1,4 +1,4 @@
-import java.util.Scanner;
+// import java.util.Scanner;
 
 public class Task {
     private String taskDescription;
@@ -35,27 +35,27 @@ public class Task {
         this.taskDueDate = taskDueDate;
     }
 
-    public void editTask(Scanner scanner) {
-        System.out.print("a) Name, b) Description, c) Due date? Enter letter: ");
-        String editLetter = scanner.nextLine();
-        System.out.println();
+    // public void editTask(Scanner scanner) {
+    //     System.out.print("a) Name, b) Description, c) Due date? Enter letter: ");
+    //     String editLetter = scanner.nextLine();
+    //     System.out.println();
 
-        switch (editLetter.toLowerCase()) {
-            case "a":
-                System.out.print("Enter new name: ");
-                this.taskName = scanner.nextLine();
-                break;
-            case "b":
-                System.out.print("Enter new description: ");
-                this.taskDescription = scanner.nextLine();
-                break;
-            case "c":
-                System.out.print("Enter new due date: ");
-                this.taskDueDate = scanner.nextLine();
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                break;
-        }
-    }
+    //     switch (editLetter.toLowerCase()) {
+    //         case "a":
+    //             System.out.print("Enter new name: ");
+    //             this.taskName = scanner.nextLine();
+    //             break;
+    //         case "b":
+    //             System.out.print("Enter new description: ");
+    //             this.taskDescription = scanner.nextLine();
+    //             break;
+    //         case "c":
+    //             System.out.print("Enter new due date: ");
+    //             this.taskDueDate = scanner.nextLine();
+    //             break;
+    //         default:
+    //             System.out.println("Invalid choice.");
+    //             break;
+    //     }
+    // }
 }

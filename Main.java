@@ -15,7 +15,9 @@ public class Main {
 
         }
 
-        public static void addTask(Scanner scanner, List<Task> allTasks) {
+
+
+    public static void addTask(Scanner scanner, List<Task> allTasks) {
         System.out.println();
         System.out.print("How many tasks? ");
         String taskNumb = scanner.nextLine();
@@ -51,6 +53,30 @@ public class Main {
             System.out.println("Due Date: " + task.getTaskDueDate());
             System.out.println();
             taskCount++;
+        }
+    }
+
+    public void editTask(Scanner scanner) {
+        System.out.print("a) Name, b) Description, c) Due date? Enter letter: ");
+        String editLetter = scanner.nextLine();
+        System.out.println();
+
+        switch (editLetter.toLowerCase()) {
+            case "a":
+                System.out.print("Enter new name: ");
+                String taskName = scanner.nextLine();
+                break;
+            case "b":
+                System.out.print("Enter new description: ");
+                String taskDescription = scanner.nextLine();
+                break;
+            case "c":
+                System.out.print("Enter new due date: ");
+                String taskDueDate = scanner.nextLine();
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
         }
     }
     
